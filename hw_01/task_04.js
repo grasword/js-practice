@@ -74,10 +74,10 @@ const ages = [19, 22, 19, 24, 20, 25, 26, 24, 25, 24]
 // Sort the array and find the min and max age
 const sortedArrAges = ages.sort((a, b) => a - b)
 
-const minAge = Math.min(...sortedArrAges)
-const maxAge = Math.max(...sortedArrAges)
+const maxAge = sortedArrAges.pop()
+const minAge = sortedArrAges.shift()
 
-console.log(`Min and Max age is ${minAge} and ${maxAge}`)
+console.log(`Min and Max age are ${minAge} and ${maxAge}`)
 
 // Find the median age(one middle item or two middle items divided by two)
 const findMedian = (arr) => {
