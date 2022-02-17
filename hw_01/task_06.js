@@ -12,17 +12,18 @@ const showDateTime = () => `${date}-${month}-${year} ${hour}:${minutes}`
 console.log(showDateTime())
 
 // 2. Declare a function name swapValues. This function swaps value of x to y (without using extra variables)
-const swapValues = (x, y) => `x = ${y}, y = ${x}`
+const swapValues = (x, y) => {
+  ;[x, y] = [y, x]
+  return `x = ${x}, y = ${y}`
+}
 
 console.log(swapValues(3, 4)) // x => 4, y => 3
-console.log(swapValues(4, 5)) // x = 5, y = 4
+console.log(swapValues(4, 5)) // x = 5, y
 
 // 3. Declare a function name reverseArray. It takes array as a parameter and it returns the reverse of the array (don't use method)
 const reverseArray = (arr) => {
   const reversed = []
-  arr.forEach((el) => {
-    reversed.unshift(el)
-  })
+  arr.forEach(reversed.unshift)
   return reversed
 }
 
@@ -67,9 +68,23 @@ console.log(isArrayUnique([1, 2, 3, 4])) // true
 console.log(isArrayUnique([1, 4, 4, 4])) // false
 
 // 8. Write a function which checks if all the items of the array are the same data type
+const detectType = (x) => {
+  let type = typeof x
+  if (type === 'object') {
+    type = Object.prototype.toString.call(x)
+  }
+  if (Number.isNaN(x)) {
+    type = 'NaN'
+  }
+  return type
+}
+
 const areElementsSameType = (arr) => {
-  return new Set(arr.map((x) => typeof x)).size <= 1
+  return new Set(arr.map(detectType)).size <= 1
 }
 
 console.log(areElementsSameType([1, 2, 3])) // true
 console.log(areElementsSameType([1, 2, 3, 4, 'a'])) // false
+console.log(areElementsSameType([NaN, 2])) // should be false
+console.log(areElementsSameType([[], {}])) // should be false
+console.log(areElementsSameType([null, {}])) // should be false
