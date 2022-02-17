@@ -146,10 +146,42 @@ console.log(countUsers(users, 50)) // 3
 const personAccount = {
   firstName: 'John',
   lastName: 'Doe',
-  incomes,
-  expenses,
-  totalIncome: function () {}
+  incomes: [
+    { income: 2000, description: 'salary' },
+    { income: 400, description: 'courses' }
+  ],
+  expenses: [
+    { expense: 150, description: 'taxi' },
+    { expense: 400, description: 'bar' }
+  ],
+  totalIncome: function () {
+    return this.incomes.reduce((a, b) => a + b.income, 0)
+  },
+  totalExpense: function () {
+    return this.expenses.reduce((a, b) => a + b.expense, 0)
+  },
+  accountInfo: function () {
+    return `${this.firstName} ${this.lastName}\n
+    Total incomes = ${this.totalIncome()}\n
+    Total expenses = ${this.totalExpense()}\n
+    Account balance = ${this.accountBalance()}`
+  },
+  addIncome: function (income, description) {
+    this.incomes.push({ income, description })
+  },
+  addExpense: function (expense, description) {
+    this.expenses.push({ expense, description })
+  },
+  accountBalance: function () {
+    return this.totalIncome() - this.totalExpense()
+  }
 }
+
+personAccount.addIncome(1000, 'lottery')
+personAccount.addIncome(500, 'beer')
+console.log(personAccount.totalIncome())
+console.log(personAccount.accountBalance())
+console.log(personAccount.accountInfo())
 
 // Questions are based on the following two arrays: users and products
 // Imagine you are getting the above users collection from a MongoDB database.
@@ -251,6 +283,7 @@ const signUp = (newUser) => {
 }
 
 signUp(newUser)
+console.log(usersDb)
 
 // b. Create a function called signIn which allows user to sign in to the application
 const signIn = (email, password) => {
