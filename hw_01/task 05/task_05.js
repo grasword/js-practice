@@ -213,14 +213,14 @@ const countCountiesLength = (countries) => {
   return countries.map((country) => country.length)
 }
 
-console.log(countCountiesLength(countriesArray))
+console.log('Task 1: \n', countCountiesLength(countriesArray))
 
 // 2. Using the countries array, find the country containing only 5 characters
 const filterCountriesByLength = (countries, filterLength) => {
   return countries.filter((country) => country.length === filterLength)
 }
 
-console.log(filterCountriesByLength(countriesArray, 5))
+console.log('Task 2: \n', filterCountriesByLength(countriesArray, 5))
 
 // 3. Find the longest word in the webTechs array
 const webTechs = ['HTML', 'CSS', 'JavaScript', 'React', 'Redux', 'Node', 'MongoDB']
@@ -229,7 +229,7 @@ const findLongest = (arr) => {
   return arr.reduce((a, b) => (a.length < b.length ? b : a))
 }
 
-console.log(findLongest(webTechs))
+console.log('Task 3: \n', findLongest(webTechs))
 
 // 4. Use the webTechs array to create the following array of arrays
 // [["HTML", 4], ["CSS", 3],["JavaScript", 10],["React", 5],["Redux", 5],["Node", 4],["MongoDB", 7]]
@@ -237,7 +237,7 @@ const createArrayOfArrays = (arr) => {
   return arr.map((el) => [el, el.length])
 }
 
-console.log(createArrayOfArrays(webTechs))
+console.log('Task 4: \n', createArrayOfArrays(webTechs))
 
 // 5. This is a fruit array , ['banana', 'orange', 'mango', 'lemon'] reverse the order using loop without using a reverse method
 const fruits = ['banana', 'orange', 'mango', 'lemon']
@@ -250,55 +250,51 @@ const reverse = (arr) => {
   return reversed
 }
 
-console.log(reverse(fruits))
+console.log('Task 5: \n', reverse(fruits))
 
 // .6 Copy countries array (avoid mutation)
 const copyArray = (arr) => {
   return [...arr]
 }
 
-console.log(copyArray(countriesArray))
+console.log('Task 6: \n', copyArray(countriesArray))
 
 // 7. Sort the webTechs array
-
-console.log(webTechs.sort((a, b) => a.localeCompare(b, 'en')))
+console.log(
+  'Task 7: \n \n',
+  webTechs.sort((a, b) => a.localeCompare(b, 'en'))
+)
 
 //
 //
 // Find the country containing the hightest number of characters in the countries array
-console.log(findLongest(Countries))
+console.log('Country containing the hightest number of characters in the countries array is: ', findLongest(Countries))
 
 // Extract all the countries contain the word 'land' from the countries array and print it as array
-const findLandWord = (arr) => {
-  // replace implementation with Array.filter()
-  const filteredArr = []
-  regexp = /land/g
-  arr.forEach((el) => {
-    if (el.match(regexp)) {
-      filteredArr.push(el)
-    }
-  })
-  return filteredArr
-}
-console.log(findLandWord(Countries))
+const findLandWord = (arr) => arr.filter((c) => c.match(/land/g))
+
+console.log("All the countries contain the word 'land' from the countries array: \n", findLandWord(Countries))
 
 // Extract all the countries containing two or more words from the countries array and print it as array
 const findMultiWordCountries = (arr) => {
-  // replace with .map and .filter
-  arr.forEach((el) => {
-    const countryArr = el.split(' ')
-    if (countryArr.length > 1) {
-      console.log(countryArr)
-    }
-  })
+  return arr.map((c) => c.split(' ')).filter((c) => c.length > 1)
+
+  // arr.forEach((el) => {
+  //   const countryArr = el.split(' ')
+  //   if (countryArr.length > 1) {
+  //     return countryArr
+  //   }
+  // })
 }
 
-findMultiWordCountries(Countries)
+console.log(
+  'All the countries containing two or more words from the countries array: \n',
+  findMultiWordCountries(Countries)
+)
 
 // Reverse the countries array and capitalize each country and store it as an array
 const formatCountries = (arr) => {
   const capitalizedArr = arr.map((el) => el.toUpperCase())
-  capitalizedArr
   const reversedArr = capitalizedArr.reverse()
   return reversedArr.map((el) => {
     const arr = []
@@ -307,6 +303,7 @@ const formatCountries = (arr) => {
   })
 }
 
+// With pipe
 const formatCountriesFP = (arr) => {
   const capitalize = (str) => str.toUpperCase()
   const toArray = (str) => [str]
@@ -314,5 +311,8 @@ const formatCountriesFP = (arr) => {
   return arr.reverse().map(capitalize).map(toArray)
 }
 
-console.log(formatCountries(Countries))
-console.log(formatCountriesFP(Countries))
+console.log(
+  'Reverse the countries array and capitalize each country and store it as an array: \n',
+  formatCountries(Countries)
+)
+// console.log(formatCountriesFP(Countries))

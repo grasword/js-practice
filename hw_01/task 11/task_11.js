@@ -106,12 +106,15 @@ const txt = `{
 // 1. Stringify the students object with only firstName, lastName and skills properties
 const getStudent = (s) => JSON.stringify(s, ['firstName', 'lastName', 'skills'], 2)
 
-console.log(getStudent(student))
+console.log(
+  'Task 1: Stringify the students object with only firstName, lastName and skills properties',
+  getStudent(student)
+)
 
 // 2. Parse the txt JSON to object
 const parseToObj = (json) => JSON.parse(json)
 
-console.log(parseToObj(txt))
+console.log('Task 2: Parse the txt JSON to object', parseToObj(txt))
 
 // 3. Find the user who has many skills from the variable stored in txt
 const mostSkilled = (json) => {
@@ -124,4 +127,4 @@ const mostSkilled = (json) => {
   return `${mostSkilled[0]} has skills ${mostSkilled[1].skills.join(', ')}`
 }
 
-console.log(mostSkilled(txt))
+console.log('Task 3: Find the user who has many skills from the variable stored in txt \n', mostSkilled(txt))

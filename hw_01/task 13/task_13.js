@@ -4,7 +4,7 @@ const catsAPI = 'https://api.thecatapi.com/v1/breeds'
 // 1. Read the countries API using fetch and print the name of country, capital, languages, population and area
 const getCountries = async () => {
   try {
-    const response = await fetch(countriesAPI).json()
+    const response = await fetch(countriesAPI)
     const countries = await response.json()
     return countries.map((c) => ({
       name: c.name.common,
@@ -17,7 +17,12 @@ const getCountries = async () => {
   }
 }
 
-getCountries().then(console.log)
+getCountries().then((resp) =>
+  console.log(
+    'Task 1: Read the countries API using fetch and print the name of country, capital, languages, population and area',
+    resp
+  )
+)
 
 // 2. Print out all the cat names in to catNames variable
 const getCatNames = async () => {
@@ -30,7 +35,7 @@ const getCatNames = async () => {
   }
 }
 
-getCatNames().then(console.log)
+getCatNames().then((resp) => console.log('Task 2: Print out all the cat names in to catNames variable', resp))
 
 // 3. Read the countries api and find out the 10 largest countries
 const getLargestCountries = async (num) => {
@@ -46,7 +51,9 @@ const getLargestCountries = async (num) => {
   }
 }
 
-getLargestCountries(10).then(console.log)
+getLargestCountries(10).then((resp) =>
+  console.log('Task 3: Read the countries api and find out the 10 largest countries', resp)
+)
 
 // 4. Read the countries api and count total number of languages in the world used as officials
 const getOfficialLanguages = async (num) => {
@@ -60,6 +67,6 @@ const getOfficialLanguages = async (num) => {
   }
 }
 
-getOfficialLanguages().then((response) =>
-  console.log(`Total number of languages in the world used as officials: ${response}`)
+getOfficialLanguages().then((resp) =>
+  console.log(`Task 4: Total number of languages in the world used as officials: ${resp}`)
 )

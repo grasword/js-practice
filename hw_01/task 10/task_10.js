@@ -134,7 +134,10 @@ const keys = (users) => {
   )
 }
 
-keys(users)
+console.log(
+  'Task 1: Iterate through the users array and get all the keys of the object using destructuring',
+  keys(users)
+)
 
 // 2. Find the persons who have less than two skills
 const getPerson = (users, number) => {
@@ -148,7 +151,8 @@ const getPerson = (users, number) => {
 
   return users.filter(({ skills }) => skills.length < number).map(({ name }) => name)
 }
-console.log(`Persons who have less than two skills: ${getPerson(users, 2)} `)
+
+console.log(`Task 2: Persons who have less than two skills: ${getPerson(users, 2)} `)
 
 // 3. Destructure the countries object print name, capital, population and languages of all countries
 const getCountries = (countries) => {
@@ -158,7 +162,10 @@ const getCountries = (countries) => {
   )
 }
 
-console.log(getCountries(countries))
+console.log(
+  'Task 3: Destructure the countries object print name, capital, population and languages of all countries:',
+  getCountries(countries)
+)
 
 // 4. Write a function called convertArrayToObject which can convert the array to a structure object.
 const students = [
@@ -172,7 +179,10 @@ const convertArrayToObject = (students) => {
   })
 }
 
-console.log(convertArrayToObject(students))
+console.log(
+  'Task 4: Write a function called convertArrayToObject which can convert the array to a structure object. \n',
+  convertArrayToObject(students)
+)
 
 // 5. Copy the student object to newStudent without mutating the original object. In the new object add the following:
 const student = {
@@ -211,4 +221,4 @@ const moderateStudent = (student) => {
   }
   return newStudent
 }
-console.log(moderateStudent(student))
+console.log('Task 5: ', moderateStudent(student))

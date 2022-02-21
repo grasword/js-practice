@@ -46,9 +46,9 @@ const personAccount = function () {
 
 const person = personAccount()
 
-console.log(person.totalIncome())
-console.log(person.totalExpense())
+console.log('Total Income', person.totalIncome())
+console.log('Total Expense', person.totalExpense())
 person.addIncome(450, 'gift')
 person.addExpense(700, 'massage')
-console.log(person.accountBalance())
-console.log(person.accountInfo())
+console.log('Account Balance', person.accountBalance())
+console.log('Account Info', person.accountInfo())

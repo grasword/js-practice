@@ -7,21 +7,22 @@
 
 const getGrade = (num) => {
   if (num >= 90 && num <= 100) {
-    console.log('A')
+    return 'A'
   } else if (num >= 70 && num <= 89) {
-    console.log('B')
+    return 'B'
   } else if (num >= 60 && num <= 69) {
-    console.log('C')
+    return 'C'
   } else if (num >= 50 && num <= 59) {
-    console.log('D')
+    return 'D'
   } else if (num >= 0 && num <= 49) {
-    console.log('F')
+    return 'F'
   } else {
-    console.log('wrong input')
+    return 'wrong input'
   }
 }
 
-getGrade(10)
+console.log('Task 1: \n', getGrade(10))
+console.log('Task 1: \n', getGrade(75))
 
 // 2.Check if the season is Autumn, Winter, Spring or Summer.
 // If the user input is:
@@ -34,19 +35,20 @@ getGrade(10)
 const getSeason = (input) => {
   const month = input.toLowerCase().charAt(0).toUpperCase() + input.toLowerCase().slice(1)
   if (month === 'September' || month === 'October' || month === 'November') {
-    console.log('Autumn')
+    return `${month} month of Autumn`
   } else if (month === 'December' || month === 'January' || month === 'February') {
-    console.log('Winter')
+    return `${month} month of Winter`
   } else if (month === 'March' || month === 'April' || month === 'May') {
-    console.log('Spring')
+    return `${month} month of Spring`
   } else if (month === 'June' || month === 'July' || month === 'August') {
-    console.log('Summer')
+    return `${month} month of Summer`
   } else {
-    console.log('Wrong Input')
+    return 'Wrong Input'
   }
 }
 
-getSeason('June')
+console.log('Task 2: \n', getSeason('June'))
+console.log('Task 2: \n', getSeason('may'))
 
 // 3. Check if a day is weekend day or a working day. Your script will take day as an input.
 //   What is the day today? Saturday
@@ -67,35 +69,36 @@ const checkDay = (input) => {
   const weekDays = ['Saturday', 'Sunday']
 
   if (workingDays.includes(day)) {
-    console.log(`${day} is a working day.`)
+    return `${day} is a working day.`
   } else if (weekDays.includes(day)) {
-    console.log(`${day} is a weekend.`)
+    return `${day} is a weekend.`
   } else {
-    console.log('Wrong Input')
+    return 'Wrong Input'
   }
 }
 
-checkDay('saturDaY')
+console.log('Task 3: \n', checkDay('saturDaY'))
+console.log('Task 3: \n', checkDay('MondaY'))
 
 // 4. Write a program which tells the number of days in a month.
-  // Enter a month: January
-  // January has 31 days.
+// Enter a month: January
+// January has 31 days.
 
-  // Enter a month: JANUARY
-  // January has 31 days.
+// Enter a month: JANUARY
+// January has 31 days.
 
-  // Enter a month: February
-  // February has 28 days.
+// Enter a month: February
+// February has 28 days.
 
-  // Enter a month: FEbruary
-  // February has 28 days.
+// Enter a month: FEbruary
+// February has 28 days.
 
 const getNumberOfDaysIn = (input) => {
   const month = input.toLowerCase().charAt(0).toUpperCase() + input.toLowerCase().slice(1)
   const year = new Date().getFullYear()
   const monthNumber = new Date(`${month}, ${year}`).getMonth()
   const numberOfDays = new Date(year, monthNumber + 1, 0).getDate()
-  console.log(numberOfDays)
+  return numberOfDays
 }
 
-getNumberOfDaysIn('FebruAry')
+console.log('Task 4: \n', `number of days in a month ${getNumberOfDaysIn('FebruAry')}`)

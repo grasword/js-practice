@@ -51,7 +51,6 @@ const users = {
 }
 
 // 1. Find the person who has many skills in the users object
-
 const mostSkilled = (users) => {
   let maxSkillsLength = 0
   let storedUser = {}
@@ -66,7 +65,7 @@ const mostSkilled = (users) => {
   return `${storedUser[0]} has skills ${storedUser[1].skills.join(' ')}`
 }
 
-console.log(mostSkilled(users))
+console.log('Task 1: \n', mostSkilled(users))
 
 // First solution before refactoring
 //
@@ -115,7 +114,7 @@ const countLoginUsers = (users) => {
   return count
 }
 
-console.log(countLoginUsers(users)) // 2
+console.log('Task 2: `The number of logged in users:`', countLoginUsers(users)) // 2
 
 const countUsers = (users, number) => {
   let count = 0
@@ -128,7 +127,7 @@ const countUsers = (users, number) => {
   return count
 }
 
-console.log(countUsers(users, 50)) // 3
+console.log('Task 2: `The number of users with greater than or equal to 50 points:`', countUsers(users, 50)) // 3
 
 // 3. Create an object literal called personAccount. It has firstName, lastName, incomes, expenses properties
 // and it has totalIncome, totalExpense, accountInfo,addIncome, addExpense and accountBalance methods.
@@ -179,9 +178,9 @@ const personAccount = {
 
 personAccount.addIncome(1000, 'lottery')
 personAccount.addIncome(500, 'beer')
-console.log(personAccount.totalIncome())
-console.log(personAccount.accountBalance())
-console.log(personAccount.accountInfo())
+console.log('Task 3: Total income: ', personAccount.totalIncome())
+console.log('Task 3: Account balance: ', personAccount.accountBalance())
+console.log('Task 3: Account info: ', personAccount.accountInfo())
 
 // Questions are based on the following two arrays: users and products
 // Imagine you are getting the above users collection from a MongoDB database.
@@ -277,6 +276,9 @@ const signUp = (newUser) => {
     : usersDb.push(newUser)
 }
 
+console.log(
+  'Task 4: Create a function called signUp which allows user to add to the collection. If user exists, inform the user that he has already an account.'
+)
 signUp(newUser)
 console.log(usersDb)
 
@@ -289,21 +291,10 @@ const signIn = (email, password) => {
   } else {
     return 'User not found'
   }
-
-  // usersDb.forEach((user) => {
-  //   const arr = Object.values(user)
-  //   const isValidEmail = arr.includes(email)
-  //   const isValidPassword = arr.includes(password)
-  //   if (isValidEmail && isValidPassword) {
-  //     user.isLoggedIn = true
-  //     console.log(`Welcome ${user.username}`)
-  //     return
-  //   }
-  // })
 }
 
-signIn('alex@alex.com', '123123')
-usersDb
+console.log('Task 5: Create a function called signIn which allows user to sign in to the application')
+console.log(signIn('alex@alex.com', '123123'))
 
 // The products array has three elements and each of them has six properties.
 
@@ -326,8 +317,9 @@ const rateProduct = (prodId, score, userId) => {
   }
 }
 
+console.log('Task 6: Create a function called rateProduct which rates the product')
 rateProduct('hedfcg', 4, 'testId')
-rateProduct('aegfal', 6, 'testId_2')
+rateProduct('aegfal', 5, 'testId_2')
 
 // b. Create a function called averageRating which calculate the average rating of a product
 const averageRating = (prodId) => {
@@ -349,7 +341,6 @@ const likeProduct = (prodId, userId) => {
   const product = findProduct(prodId)
   if (product) {
     const likes = product.likes
-
     likes.some((l) => l === userId) ? (product.likes = likes.filter((l) => l !== userId)) : product.likes.push(userId)
     // let isLiked = false
 
@@ -366,4 +357,9 @@ const likeProduct = (prodId, userId) => {
   }
 }
 
+console.log(
+  'Create a function called likeProduct. This function will helps to like to the product if it is not liked and remove like if it was liked.'
+)
+
 likeProduct('aegfal', 'testUserId')
+likeProduct('potato', '255')
