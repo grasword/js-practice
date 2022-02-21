@@ -271,12 +271,7 @@ const newUser = {
 }
 
 const signUp = (newUser) => {
-  let isRegistered = false
-  usersDb.forEach((user) => {
-    if (user._id === newUser._id) {
-      isRegistered = !isRegistered
-    }
-  })
+  let isRegistered = usersDb.some((user) => user._id === newUser._id)
   isRegistered
     ? console.log(`The user is already registered ${JSON.stringify(newUser, null, ' ')}`)
     : usersDb.push(newUser)
@@ -287,34 +282,44 @@ console.log(usersDb)
 
 // b. Create a function called signIn which allows user to sign in to the application
 const signIn = (email, password) => {
-  usersDb.forEach((user) => {
-    const arr = Object.values(user)
-    const isValidEmail = arr.includes(email)
-    const isValidPassword = arr.includes(password)
-    if (isValidEmail && isValidPassword) {
-      user.isLoggedIn = true
-      console.log(`Welcome ${user.username}`)
-      return
-    }
-  })
+  let user = usersDb.find((u) => u.email === email && u.password === password)
+  if (user) {
+    user.isLoggedIn = true
+    return 'Login successful'
+  } else {
+    return 'User not found'
+  }
+
+  // usersDb.forEach((user) => {
+  //   const arr = Object.values(user)
+  //   const isValidEmail = arr.includes(email)
+  //   const isValidPassword = arr.includes(password)
+  //   if (isValidEmail && isValidPassword) {
+  //     user.isLoggedIn = true
+  //     console.log(`Welcome ${user.username}`)
+  //     return
+  //   }
+  // })
 }
 
 signIn('alex@alex.com', '123123')
+usersDb
 
 // The products array has three elements and each of them has six properties.
 
 // a. Create a function called rateProduct which rates the product
 // helper function
 const findProduct = (prodId) => {
-  for (let prod of products) {
-    if (prod._id === prodId) return prod
-  }
+  return products.find((p) => p._id === prodId)
+  // for (let prod of products) {
+  //   if (prod._id === prodId) return prod
+  // }
 }
 
-const rateProduct = (prodId, rate, userId) => {
+const rateProduct = (prodId, score, userId) => {
   const product = findProduct(prodId)
   if (product) {
-    product.ratings.push({ userId, rate })
+    product.ratings.push({ userId, score })
     console.log('Thanks for rating our product!')
   } else {
     console.log('Wrong product ID')
@@ -328,8 +333,10 @@ rateProduct('aegfal', 6, 'testId_2')
 const averageRating = (prodId) => {
   const product = findProduct(prodId)
   if (product) {
-    const rates = product.ratings.map((el) => el.rate)
-    return rates.reduce((a, b) => a + b) / rates.length
+    const sumOfRatings = product.ratings.map((r) => r.rate).reduce((p, c) => p + c, 0)
+    return sumOfRatings / product.ratings.length
+    // const rates = product.ratings.map((el) => el.rate)
+    // return rates.reduce((a, b) => a + b) / rates.length
   } else {
     console.log('Wrong product ID')
   }
@@ -342,16 +349,18 @@ const likeProduct = (prodId, userId) => {
   const product = findProduct(prodId)
   if (product) {
     const likes = product.likes
-    let isLiked = false
 
-    likes.forEach((like, i) => {
-      if (like === userId) {
-        isLiked = !isLiked
-        product.likes.splice(i, 1)
-      }
-    })
+    likes.some((l) => l === userId) ? (product.likes = likes.filter((l) => l !== userId)) : product.likes.push(userId)
+    // let isLiked = false
 
-    if (!isLiked) product.likes.push(userId)
+    // likes.forEach((like, i) => {
+    //   if (like === userId) {
+    //     isLiked = !isLiked
+    //     product.likes.splice(i, 1)
+    //   }
+    // })
+
+    // if (!isLiked) product.likes.push(userId)
   } else {
     console.log('Wrong product ID')
   }
