@@ -28,9 +28,10 @@ class Dog extends Animal {
   }
 }
 const dog = new Dog('Kubik', 10, 'black', 4)
-dog.getName()
-dog.getAge()
-dog.getColor()
+dog.saySomething()
+console.log(dog.getName)
+console.log(dog.getAge)
+console.log(dog.getColor)
 
 // 3. Override the method you create in Animal class
 class Cat extends Animal {
@@ -47,7 +48,7 @@ class Cat extends Animal {
   }
 }
 const cat = new Cat('Dushes', 1, 'orange', 4, 'fat')
-cat.getWeight()
+console.log(cat.getWeight)
 
 // 4. Create a class called PersonAccount. It has firstname, lastname, incomes, expenses properties and it has
 //  totalIncome, totalExpense, accountInfo, addIncome, addExpense and accountBalance methods.
