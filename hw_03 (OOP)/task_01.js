@@ -101,3 +101,159 @@ console.log('Account Balance', person.accountBalance())
 console.log('Account Info', person.accountInfo())
 
 // 5. You'll need to implement 3 classes: a Deck , a Card and a Player classes.
+// Deck Class Description:
+// Class members:
+
+// properties:
+// cards : contains an array of remaining cards in the deck (initially it is 52).
+// count : number of remaining cards in the deck, should be readonly.
+
+// methods:
+// shuffle() : rearranges cards in the deck randomly.
+// draw(n) : removes the last n cards from the deck and returns them.
+
+// Implementation Details: Initially each deck is filled with 52 cards (13 from each of 4 suits).
+class Deck {
+  constructor() {
+    this.deck = []
+    const suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
+    const cards = {
+      1: 'Ace',
+      2: 'Two',
+      3: 'Three',
+      4: 'Four',
+      5: 'Five',
+      6: 'Six',
+      7: 'Seven',
+      8: 'Eight',
+      9: 'Nine',
+      10: 'Ten',
+      11: 'Jack',
+      12: 'Queen',
+      13: 'King'
+    }
+    suits.forEach((s) => {
+      for (const card in cards) {
+        const a = cards[card]
+        a
+        this.deck.push(new Card(s, card, cards[card], card == 1 || card > 10))
+      }
+    })
+    this.shuffle()
+    // return this
+  }
+
+  shuffle() {
+    this.deck.forEach((el, i) => {
+      const randomIndex = Math.floor(Math.random() * (i + 1))
+      const tempEl = this.deck[randomIndex]
+      this.deck.splice(randomIndex, 1, el)
+      this.deck.splice(i, 1, tempEl)
+    })
+    return this
+  }
+
+  draw() {
+    return this.deck.pop()
+  }
+  count() {
+    return this.deck.length
+  }
+}
+
+// Card Class Description:
+// Class members:
+
+// properties:
+// suit : the suit of the card (i.e. ['Hearts', 'Diamonds', 'Clubs', ‘Spades']).
+// rank: an integer from 1 to 13. ("Ace" is 1, "King" is 13, i.e. {1: 'Ace', 11: 'Jack', 12: 'Queen', 13: 'King'}).
+// isFaceCard : a readonly property that defines whether a card is a face card (i.e. rank is either 1 or > 10).
+
+// methods:
+// toString(): human-readable string representation of the card (e.g. "Ace of Spades", "10 of Clubs", "Queen of Hearts" etc.)
+// Compare(cardOne, cardTwo): Cards must be Comparable to other cards by ranks only (no special handling for Ace).
+class Card {
+  constructor(suit, rank, name, isFaceCard) {
+    this.suit = suit
+    this.rank = rank
+    this.name = name
+    this.isFaceCard = isFaceCard
+  }
+  toString() {
+    return `${this.name} of ${this.suit}`
+  }
+  compare(cardOne, cardTwo) {
+    if (cardOne > cardTwo) {
+      return cardOne
+    } else if (cardOne < cardTwo) {
+      return cardTwo
+    } else {
+      return null
+    }
+  }
+}
+
+// Player Class Description
+// Class members:
+
+// properties:
+
+// name : player name;
+// wins: number of wins, readonly;
+// deck : a deck of cards;
+
+// methods:
+// Play(playerOne, playerTwo): starts the game;
+
+// Implementation Details:
+
+// Players both take a card from their deck.
+// Whoever has a card with higher value wins the round and gets one point (if the cards are of the same value, neither of them gets a point).
+// After the two cards are discarded (removed from the deck), they flip the next card from the deck.
+// The game lasts until they are run out of cards.
+// When game ends, figure out who is a winner (compare their scores) and return a summing up message with the final score: {Winner} wins {X} to {Y} (i.e. "John wins 10 to 7").
+
+// Please think carefully, what should be exposed to the world and what should be kept private (encapsulate sensitive data and unnecessary implementation
+// details). Consider making use of static methods!
+class Player {
+  constructor(name) {
+    this.name = name
+    this.deck = new Deck()
+    this.wins = 0
+  }
+
+  play(playerOne, playerTwo) {
+    while (playerTwo.deck.count() > 0) {
+      let message = ''
+      const card1 = playerOne.deck.draw()
+      const card2 = playerTwo.deck.draw()
+      if (card1.compare(card1, card2) === card1) {
+        playerOne.wins += 1
+        message = `Winner is ${playerOne.name}`
+      } else if (card1.compare(card1, card2) === null) {
+        message = `It's a draw.`
+      } else {
+        playerTwo.wins += 1
+        message = `Winner is ${playerTwo.name}`
+      }
+      console.log(
+        `${playerOne.name} draws a '${card1.toString()}' \n${
+          playerTwo.name
+        } draws a '${card2.toString()}' \n  ${message}`
+      )
+    }
+
+    if (playerOne.wins > playerTwo.wins) {
+      console.log(`${playerOne.name} wins ${playerOne.wins} to ${playerTwo.wins}`)
+    } else if (playerOne.wins < playerTwo.wins) {
+      console.log(`${playerTwo.name} wins ${playerTwo.wins} to ${playerOne.wins}`)
+    } else {
+      console.log(`It's a draw! ${playerOne.wins} to ${playerTwo.wins}`)
+    }
+  }
+}
+
+const playerOne = new Player('Oleh')
+const playerTwo = new Player('Euhen')
+
+playerOne.play(playerOne, playerTwo)
