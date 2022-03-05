@@ -134,13 +134,10 @@ class Deck {
     }
     suits.forEach((s) => {
       for (const card in cards) {
-        const a = cards[card]
-        a
         this.deck.push(new Card(s, card, cards[card], card == 1 || card > 10))
       }
     })
     this.shuffle()
-    // return this
   }
 
   shuffle() {
@@ -156,7 +153,7 @@ class Deck {
   draw() {
     return this.deck.pop()
   }
-  count() {
+  get count() {
     return this.deck.length
   }
 }
@@ -182,7 +179,7 @@ class Card {
   toString() {
     return `${this.name} of ${this.suit}`
   }
-  compare(cardOne, cardTwo) {
+  static compare(cardOne, cardTwo) {
     if (cardOne > cardTwo) {
       return cardOne
     } else if (cardOne < cardTwo) {
@@ -221,21 +218,30 @@ class Player {
     this.deck = new Deck()
     this.wins = 0
   }
+  get getWins() {
+    return this.wins
+  }
 
-  play(playerOne, playerTwo) {
-    while (playerTwo.deck.count() > 0) {
+  set setWin(number) {
+    this.wins += number
+  }
+
+  static play(playerOne, playerTwo) {
+    while (playerTwo.deck.count > 0) {
       let message = ''
       const card1 = playerOne.deck.draw()
       const card2 = playerTwo.deck.draw()
-      if (card1.compare(card1, card2) === card1) {
-        playerOne.wins += 1
+
+      if (Card.compare(card1, card2) === card1) {
+        playerOne.setWin = 1
         message = `Winner is ${playerOne.name}`
-      } else if (card1.compare(card1, card2) === null) {
+      } else if (Card.compare(card1, card2) === null) {
         message = `It's a draw.`
       } else {
-        playerTwo.wins += 1
+        playerTwo.setWin = 1
         message = `Winner is ${playerTwo.name}`
       }
+
       console.log(
         `${playerOne.name} draws a '${card1.toString()}' \n${
           playerTwo.name
@@ -243,12 +249,12 @@ class Player {
       )
     }
 
-    if (playerOne.wins > playerTwo.wins) {
-      console.log(`${playerOne.name} wins ${playerOne.wins} to ${playerTwo.wins}`)
+    if (playerOne.getWins > playerTwo.getWins) {
+      console.log(`${playerOne.name} wins ${playerOne.getWins} to ${playerTwo.getWins}`)
     } else if (playerOne.wins < playerTwo.wins) {
-      console.log(`${playerTwo.name} wins ${playerTwo.wins} to ${playerOne.wins}`)
+      console.log(`${playerTwo.name} wins ${playerTwo.getWins} to ${playerOne.getWins}`)
     } else {
-      console.log(`It's a draw! ${playerOne.wins} to ${playerTwo.wins}`)
+      console.log(`It's a draw! ${playerOne.getWins} to ${playerTwo.getWins}`)
     }
   }
 }
@@ -256,4 +262,4 @@ class Player {
 const playerOne = new Player('Oleh')
 const playerTwo = new Player('Euhen')
 
-playerOne.play(playerOne, playerTwo)
+Player.play(playerOne, playerTwo)
