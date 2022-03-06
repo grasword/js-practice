@@ -291,11 +291,12 @@ Player.play(playerOne, playerTwo)
 // changeDepartment(newDepartment) ;
 // changePosition(newPosition) ;
 // changeSalary(newSalary) ;
-// getPromoted(benefits) - takes an object that can contain salary, position and department in any combination. If the property is defined, then appropriate method is called. Log: "Yoohooo!"
+// getPromoted(benefits) - takes an object that can contain salary, position and department in any combination.
+// If the property is defined, then appropriate method is called. Log: "Yoohooo!"
 // getDemoted(punishment) - apply the same logic as to getPromoted. Log: "Damn!"
 class Employee {
-  constructor(id, firstName, lastName, birthday, salary, position, department) {
-    this.id = id
+  constructor(firstName, lastName, birthday, salary, position, department) {
+    this.id = this.generateId()
     this.firstName = firstName
     this.lastName = lastName
     this.birthday = birthday
@@ -325,6 +326,49 @@ class Employee {
   set setEmployees(employee) {
     Employee.EMPLOYEES.push(employee)
   }
+
+  // Methods
+  quit() {
+    const index = Employee.EMPLOYEES.findIndex((v) => v.id === this.id)
+    Employee.EMPLOYEES.splice(index, 1)
+  }
+  retire() {
+    this.quit()
+    console.log(`It was such a pleasure to work with you ${this.fullName}!`)
+  }
+  getFired() {
+    this.quit()
+    console.log('Not a big deal!')
+  }
+  generateId() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1)
+  }
+  changeDepartment(newDepartment) {
+    this.department = newDepartment
+  }
+  changePosition(newPosition) {
+    this.position = newPosition
+  }
+  changeSalary(newSalary) {
+    this.salary = newSalary
+  }
+  getPromoted(benefits) {
+    this.changeProps(benefits)
+    console.log('Yoohooo!')
+  }
+  getDemoted(punishment) {
+    this.changeProps(punishment)
+    console.log('Damn!')
+  }
+  changeProps(props) {
+    for (const prop in props) {
+      if (prop === 'salary') this.changeSalary(props[prop])
+      if (prop === 'position') this.changePosition(props[prop])
+      if (prop === 'department') this.changeDepartment(props[prop])
+    }
+  }
 }
 
 // Manager Class Description:
@@ -342,4 +386,5 @@ class Employee {
 // SalesManager Class Implementation:
 // Implementation Details: Inherits from Manager. Its constructor does not require department property, it should always be initialized as ‘sales’.
 
-const worker1 = new Employee(1, 'Oleh', 'Zhmaiev', '1989, 10, 25', 1000, 'QA engineer', 'Testing')
+const employeeOleg = new Employee('Oleh', 'Zhmaiev', '1989, 10, 25', 1000, 'QA engineer', 'Testing')
+const employeeSerj = new Employee('Serhii', 'Lavrinenko', '1988, 12, 28', 3000, 'Senior Frontend Developer', 'FrontEnd')
