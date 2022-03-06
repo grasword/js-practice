@@ -263,3 +263,83 @@ const playerOne = new Player('Oleh')
 const playerTwo = new Player('Euhen')
 
 Player.play(playerOne, playerTwo)
+
+// You'll need to implement inheritance in JS: a base class Employee that takes a single data object, two derived from it classes:
+//  Manager and BlueCollarWorker, and two more classes that inherit from Manager: HRManager and SalesManager.
+
+// Employee Class Description:
+// Class members:
+
+// properties:
+
+// id ;
+// firstName ;
+// lastName ;
+// birthday ;
+// salary ;
+// position ;
+// department ;
+// age : readonly property dynamically calculated based on birthday;
+// fullName: readonly;
+// EMPLOYEES : static readonly property where each user gets registered on initialization (contains list of all instances, except intentionally deleted once).
+
+// methods:
+
+// quit() - remove the employee from EMPLOYEES;
+// retire() - log a message: "It was such a pleasure to work with you!" and remove from EMPLOYEES;
+// getFired() - log a message: "Not a big deal!" and remove from EMPLOYEES;
+// changeDepartment(newDepartment) ;
+// changePosition(newPosition) ;
+// changeSalary(newSalary) ;
+// getPromoted(benefits) - takes an object that can contain salary, position and department in any combination. If the property is defined, then appropriate method is called. Log: "Yoohooo!"
+// getDemoted(punishment) - apply the same logic as to getPromoted. Log: "Damn!"
+class Employee {
+  constructor(id, firstName, lastName, birthday, salary, position, department) {
+    this.id = id
+    this.firstName = firstName
+    this.lastName = lastName
+    this.birthday = birthday
+    this.salary = salary
+    this.position = position
+    this.department = department
+    this.setEmployees = this
+  }
+  static EMPLOYEES = []
+
+  get age() {
+    const birthDate = new Date(this.birthday)
+    const today = new Date()
+    const month = today.getMonth() - birthDate.getMonth()
+    let age = today.getFullYear() - birthDate.getFullYear()
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+      age--
+    }
+    return age
+  }
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`
+  }
+  static get getEmployees() {
+    return this.EMPLOYEES
+  }
+  set setEmployees(employee) {
+    Employee.EMPLOYEES.push(employee)
+  }
+}
+
+// Manager Class Description:
+// Implementation Details: Inherits from Employee. Its constructor does not require position property, it should always be initialized as ‘manager’.
+// Class members:
+
+// properties:
+
+// managedEmployees : readonly, selects all instances that belong to his/her department that are not managers.
+
+// BlueCollarWorker Class Description:
+// Implementation Details: Inherits from Employee, no special logic applied here.
+// HRManager Class Description:
+// Implementation Details: Inherits from Manager. Its constructor does not require department property, it should always be initialized as ‘hr’.
+// SalesManager Class Implementation:
+// Implementation Details: Inherits from Manager. Its constructor does not require department property, it should always be initialized as ‘sales’.
+
+const worker1 = new Employee(1, 'Oleh', 'Zhmaiev', '1989, 10, 25', 1000, 'QA engineer', 'Testing')
