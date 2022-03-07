@@ -264,7 +264,7 @@ const playerTwo = new Player('Euhen')
 
 Player.play(playerOne, playerTwo)
 
-// You'll need to implement inheritance in JS: a base class Employee that takes a single data object, two derived from it classes:
+// 6. You'll need to implement inheritance in JS: a base class Employee that takes a single data object, two derived from it classes:
 //  Manager and BlueCollarWorker, and two more classes that inherit from Manager: HRManager and SalesManager.
 
 // Employee Class Description:
@@ -295,6 +295,8 @@ Player.play(playerOne, playerTwo)
 // If the property is defined, then appropriate method is called. Log: "Yoohooo!"
 // getDemoted(punishment) - apply the same logic as to getPromoted. Log: "Damn!"
 class Employee {
+  static EMPLOYEES = []
+
   constructor(firstName, lastName, birthday, salary, position, department) {
     this.id = this.generateId()
     this.firstName = firstName
@@ -305,7 +307,6 @@ class Employee {
     this.department = department
     this.setEmployees = this
   }
-  static EMPLOYEES = []
 
   get age() {
     const birthDate = new Date(this.birthday)
@@ -376,15 +377,61 @@ class Employee {
 // Class members:
 
 // properties:
-
 // managedEmployees : readonly, selects all instances that belong to his/her department that are not managers.
+class Manager extends Employee {
+  constructor(firstName, lastName, birthday, salary, department) {
+    super(firstName, lastName, birthday, salary, department)
+    this.department = department
+    this.position = 'manager'
+  }
+  get managedEmployees() {
+    return Employee.EMPLOYEES.filter((e) => e.department === this.department && e.position !== this.position)
+  }
+}
 
 // BlueCollarWorker Class Description:
 // Implementation Details: Inherits from Employee, no special logic applied here.
+class BlueCollarWorker extends Employee {}
+
 // HRManager Class Description:
 // Implementation Details: Inherits from Manager. Its constructor does not require department property, it should always be initialized as ‘hr’.
+class HRManager extends Manager {
+  constructor(firstName, lastName, birthday, salary) {
+    super(firstName, lastName, birthday, salary)
+    this.department = 'hr'
+  }
+}
+
 // SalesManager Class Implementation:
 // Implementation Details: Inherits from Manager. Its constructor does not require department property, it should always be initialized as ‘sales’.
+class SalesManager extends Manager {
+  constructor(firstName, lastName, birthday, salary) {
+    super(firstName, lastName, birthday, salary)
+    this.department = 'sales'
+  }
+}
 
-const employeeOleg = new Employee('Oleh', 'Zhmaiev', '1989, 10, 25', 1000, 'QA engineer', 'Testing')
-const employeeSerj = new Employee('Serhii', 'Lavrinenko', '1988, 12, 28', 3000, 'Senior Frontend Developer', 'FrontEnd')
+const employeeOleg = new Employee('Oleh', 'Zhmaiev', '1989, 10, 25', 1000, 'Junior QA Engineer', 'production')
+const employeeSerj = new Employee('Serhii', 'Lavrinenko', '1988, 12, 28', 3000, 'Senior Frontend Developer', 'service')
+const employeeEuhen = new Employee('Euhen', 'Sokolov', '1995, 8, 13', 1500, 'Middle Backend Developer', 'production')
+
+const blueCollarWorkerVlad = new BlueCollarWorker('Vlad', 'Gavrilov', '1997, 11, 21', 2000, 'CoffeMan', 'service')
+console.log('Blue collar worker Vlad: ', blueCollarWorkerVlad)
+
+const hrManagerIgor = new HRManager('Igor', 'Samsonov', '1985, 5, 10', 1300)
+console.log('HR Manager Igor: ', hrManagerIgor)
+
+const salesManagerTamara = new SalesManager('Tamara', 'Martinova', '1976, 1, 13', 900)
+console.log('Sales Manager Tamara: ', salesManagerTamara)
+
+const employees = Employee.EMPLOYEES
+console.log('Employees before using methods \n', employees)
+console.log('Full name is ', employeeOleg.fullName)
+console.log('Age is ', employeeEuhen.age)
+employeeOleg.retire()
+employeeSerj.getPromoted({ salary: 3500, position: 'TeamLead Frontend Developer', department: 'production' })
+console.log('Employees after Oleg retire and Serj promotion \n', employees)
+
+const managerOksana = new Manager('Oksana', 'Ivanova', '1988, 5, 18', 1700, 'production')
+console.log('Manager Oksana \n', managerOksana)
+console.log('Managed Employees by Oksana: \n', managerOksana.managedEmployees)
