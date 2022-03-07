@@ -1,7 +1,10 @@
 // 1. Create an Animal class. The class will have name, age, color, legs properties and create different methods
 class Animal {
   constructor(name, age, color, legs) {
-    ;(this.name = name), (this.age = age), (this.color = color), (this.legs = legs)
+    this.name = name
+    this.age = age
+    this.color = color
+    this.legs = legs
   }
 
   get getName() {
@@ -19,7 +22,8 @@ class Animal {
   }
 }
 
-const animal = new Animal('Barsik', 9, 'red', 4)
+const barsik = new Animal('Barsik', 9, 'red', 4)
+console.log('Task 1: \n', barsik)
 
 // 2. Create a Dog and Cat child class from the Animal Class.
 class Dog extends Animal {
@@ -28,10 +32,12 @@ class Dog extends Animal {
   }
 }
 const dog = new Dog('Kubik', 10, 'black', 4)
+
+console.log('Task 2: \n')
 dog.saySomething()
-console.log(dog.getName)
-console.log(dog.getAge)
-console.log(dog.getColor)
+console.log('Dogs name: ', dog.getName)
+console.log('Dogs age: ', dog.getAge)
+console.log('Dogs color: ', dog.getColor)
 
 // 3. Override the method you create in Animal class
 class Cat extends Animal {
@@ -48,14 +54,17 @@ class Cat extends Animal {
   }
 }
 const cat = new Cat('Dushes', 1, 'orange', 4, 'fat')
-console.log(cat.getWeight)
+console.log('Task 3: cats weight -', cat.getWeight)
 
 // 4. Create a class called PersonAccount. It has firstname, lastname, incomes, expenses properties and it has
 //  totalIncome, totalExpense, accountInfo, addIncome, addExpense and accountBalance methods.
 //  Incomes is a set of incomes and its description and expenses is also a set of expenses and its description.
 class PersonAccount {
   constructor(firstName, lastName, incomes, expenses) {
-    ;(this.firstName = firstName), (this.lastName = lastName), (this.incomes = incomes), (this.expenses = expenses)
+    this.firstName = firstName
+    this.lastName = lastName
+    this.incomes = incomes
+    this.expenses = expenses
   }
   totalIncome() {
     return this.incomes.reduce((a, b) => a + b.income, 0)
@@ -93,6 +102,7 @@ const person = new PersonAccount(
   ]
 )
 
+console.log('Task 4: \n')
 console.log('Total Income', person.totalIncome())
 console.log('Total Expense', person.totalExpense())
 person.addIncome(450, 'gift')
@@ -249,12 +259,14 @@ class Player {
       )
     }
 
-    if (playerOne.getWins > playerTwo.getWins) {
-      console.log(`${playerOne.name} wins ${playerOne.getWins} to ${playerTwo.getWins}`)
+    const playerOneWins = playerOne.getWins
+    const playerTwoWins = playerTwo.getWins
+    if (playerOneWins > playerTwoWins) {
+      console.log(`${playerOne.name} wins ${playerOneWins} to ${playerTwoWins}`)
     } else if (playerOne.wins < playerTwo.wins) {
-      console.log(`${playerTwo.name} wins ${playerTwo.getWins} to ${playerOne.getWins}`)
+      console.log(`${playerTwo.name} wins ${playerTwoWins} to ${playerOneWins}`)
     } else {
-      console.log(`It's a draw! ${playerOne.getWins} to ${playerTwo.getWins}`)
+      console.log(`It's a draw! ${playerOneWins} to ${playerTwoWins}`)
     }
   }
 }
@@ -262,6 +274,7 @@ class Player {
 const playerOne = new Player('Oleh')
 const playerTwo = new Player('Euhen')
 
+console.log('Task 5: \n')
 Player.play(playerOne, playerTwo)
 
 // 6. You'll need to implement inheritance in JS: a base class Employee that takes a single data object, two derived from it classes:
@@ -411,6 +424,7 @@ class SalesManager extends Manager {
   }
 }
 
+console.log('Task 6: \n')
 const employeeOleg = new Employee('Oleh', 'Zhmaiev', '1989, 10, 25', 1000, 'Junior QA Engineer', 'production')
 const employeeSerj = new Employee('Serhii', 'Lavrinenko', '1988, 12, 28', 3000, 'Senior Frontend Developer', 'service')
 const employeeEuhen = new Employee('Euhen', 'Sokolov', '1995, 8, 13', 1500, 'Middle Backend Developer', 'production')
@@ -424,13 +438,11 @@ console.log('HR Manager Igor: ', hrManagerIgor)
 const salesManagerTamara = new SalesManager('Tamara', 'Martinova', '1976, 1, 13', 900)
 console.log('Sales Manager Tamara: ', salesManagerTamara)
 
-const employees = Employee.EMPLOYEES
-console.log('Employees before using methods \n', employees)
 console.log('Full name is ', employeeOleg.fullName)
-console.log('Age is ', employeeEuhen.age)
+console.log('Age is ', employeeOleg.age)
 employeeOleg.retire()
 employeeSerj.getPromoted({ salary: 3500, position: 'TeamLead Frontend Developer', department: 'production' })
-console.log('Employees after Oleg retire and Serj promotion \n', employees)
+console.log('Employees after Oleg retire and Serj promotion \n', Employee.EMPLOYEES)
 
 const managerOksana = new Manager('Oksana', 'Ivanova', '1988, 5, 18', 1700, 'production')
 console.log('Manager Oksana \n', managerOksana)
