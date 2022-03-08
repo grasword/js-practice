@@ -144,7 +144,7 @@ class Deck {
     }
     suits.forEach((s) => {
       for (const card in cards) {
-        this.deck.push(new Card(s, card, cards[card], card == 1 || card > 10))
+        this.deck.push(new Card(s, card, cards[card], this.isFaceCard(card)))
       }
     })
     this.shuffle()
@@ -165,6 +165,9 @@ class Deck {
   }
   get count() {
     return this.deck.length
+  }
+  isFaceCard(card) {
+    return card == 1 || card > 10
   }
 }
 
@@ -190,12 +193,10 @@ class Card {
     return `${this.name} of ${this.suit}`
   }
   static compare(cardOne, cardTwo) {
-    if (cardOne > cardTwo) {
-      return cardOne
-    } else if (cardOne < cardTwo) {
-      return cardTwo
-    } else {
+    if (cardOne === cardTwo) {
       return null
+    } else {
+      return cardOne > cardTwo
     }
   }
 }
@@ -241,11 +242,12 @@ class Player {
       let message = ''
       const card1 = playerOne.deck.draw()
       const card2 = playerTwo.deck.draw()
+      const compareCards = Card.compare(card1.rank, card2.rank)
 
-      if (Card.compare(card1, card2) === card1) {
+      if (compareCards) {
         playerOne.setWin = 1
         message = `Winner is ${playerOne.name}`
-      } else if (Card.compare(card1, card2) === null) {
+      } else if (compareCards === null) {
         message = `It's a draw.`
       } else {
         playerTwo.setWin = 1
@@ -263,7 +265,7 @@ class Player {
     const playerTwoWins = playerTwo.getWins
     if (playerOneWins > playerTwoWins) {
       console.log(`${playerOne.name} wins ${playerOneWins} to ${playerTwoWins}`)
-    } else if (playerOne.wins < playerTwo.wins) {
+    } else if (playerOneWins < playerTwoWins) {
       console.log(`${playerTwo.name} wins ${playerTwoWins} to ${playerOneWins}`)
     } else {
       console.log(`It's a draw! ${playerOneWins} to ${playerTwoWins}`)
