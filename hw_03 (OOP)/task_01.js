@@ -144,7 +144,7 @@ class Deck {
     }
     suits.forEach((s) => {
       for (const card in cards) {
-        this.deck.push(new Card(s, card, cards[card], this.isFaceCard(card)))
+        this.deck.push(new Card(s, card, cards[card]))
       }
     })
     this.shuffle()
@@ -166,9 +166,6 @@ class Deck {
   get count() {
     return this.deck.length
   }
-  isFaceCard(card) {
-    return card == 1 || card > 10
-  }
 }
 
 // Card Class Description:
@@ -183,21 +180,19 @@ class Deck {
 // toString(): human-readable string representation of the card (e.g. "Ace of Spades", "10 of Clubs", "Queen of Hearts" etc.)
 // Compare(cardOne, cardTwo): Cards must be Comparable to other cards by ranks only (no special handling for Ace).
 class Card {
-  constructor(suit, rank, name, isFaceCard) {
+  constructor(suit, rank, name) {
     this.suit = suit
     this.rank = rank
     this.name = name
-    this.isFaceCard = isFaceCard
   }
   toString() {
     return `${this.name} of ${this.suit}`
   }
-  static compare(cardOne, cardTwo) {
-    if (cardOne === cardTwo) {
-      return null
-    } else {
-      return cardOne > cardTwo
-    }
+  static compare(cardOneRank, cardTwoRank) {
+    return cardOneRank === cardTwoRank ? null : cardOneRank > cardTwoRank
+  }
+  get isFaceCard() {
+    this.rank == 1 || this.rank > 10
   }
 }
 
@@ -233,8 +228,8 @@ class Player {
     return this.wins
   }
 
-  set setWin(number) {
-    this.wins += number
+  addPoint() {
+    this.wins++
   }
 
   static play(playerOne, playerTwo) {
@@ -242,16 +237,14 @@ class Player {
       let message = ''
       const card1 = playerOne.deck.draw()
       const card2 = playerTwo.deck.draw()
-      const compareCards = Card.compare(card1.rank, card2.rank)
 
-      if (compareCards) {
-        playerOne.setWin = 1
-        message = `Winner is ${playerOne.name}`
-      } else if (compareCards === null) {
+      const isPlayerOneWon = Card.compare(card1.rank, card2.rank)
+      if (isPlayerOneWon === null) {
         message = `It's a draw.`
       } else {
-        playerTwo.setWin = 1
-        message = `Winner is ${playerTwo.name}`
+        const winner = isPlayerOneWon ? playerOne : playerTwo
+        winner.addPoint()
+        message = `Winner is ${winner.name}`
       }
 
       console.log(
@@ -270,6 +263,13 @@ class Player {
     } else {
       console.log(`It's a draw! ${playerOneWins} to ${playerTwoWins}`)
     }
+    //  or with destructive assignment
+    //  const [winner, loser] = playerOne.getWins > playerTwo.getWins ? [playerOne, playerTwo] : [playerTwo, playerOne]
+    //  if (winner.getWins === loser.getWins) {
+    //    console.log(`It's a draw! ${winner.getWins} to ${loser.getWins}`)
+    //  } else {
+    //    console.log(`${winner.name} wins ${winner.getWins} to ${loser.getWins}`)
+    //  }
   }
 }
 
