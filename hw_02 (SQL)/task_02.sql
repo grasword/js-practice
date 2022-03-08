@@ -1,5 +1,5 @@
 --   1) Clone data from the Shippers table to the NewShippers table.
-CREATE TABLE NewShippers SELECT * FROM Shippers;
+create table NewShippers select * from Shippers;
 
 --   2) Get the list of suppliers which are related to each product name which has price greater than or equal 15$.
 --   ( Which information about supplier will be present in result set is optional)
@@ -44,9 +44,29 @@ order by quantity desc
 limit 1
 
 --   7) Get two lists of products: with a price < 50.00 with a discountinued flag and < 50  without a discountinued flag.
+select *
+from products
+where UnitPrice < 50.0000
+and Discontinued = 1
+-- 
+select *
+from products
+where UnitPrice < 50.0000
+and Discontinued = 0
+-- don't quite understand what they want from me in the task
+
 --   8) Create new table NewProducts based on the Products table with only discountinued products. Compare data sets between Products and NewProducts tables. 
 --   (Check that only discountinued products are inserted).
+create table NewProducts
+select * from Products
+where discontinued = 1
+-- 
+select * from products where discontinued = 0 and productid in (select productid from newproducts)
+-- return nothing
 
 -- The 9th query is optional 
 --  * Get the list of orders, where a required date is bigger than the Shipped date ( compare in days) and Ship Region is not specified.
-datadiff
+select *
+from orders o
+where DATEDIFF(o.RequiredDate, o.ShippedDate) > 0
+and o.ShipRegion is null
