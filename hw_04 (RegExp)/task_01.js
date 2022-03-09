@@ -3,7 +3,7 @@ const text = `He earns 4000 euro from salary per month, 10000 euro annual bonus,
 const calculateAnnualIncome = (text) => {
   const regex = /\d+/g
   const numsArr = text.match(regex)
-  return numsArr.reduce((a, v) => parseInt(a) + parseInt(v))
+  return numsArr ? numsArr.reduce((a, v) => parseInt(a) + parseInt(v)) : 'No numbers in the string'
 }
 console.log('Task 1: Annual Income is ', calculateAnnualIncome(text))
 
@@ -13,10 +13,10 @@ const isValidVariable = (name) => {
   const regex = /^[a-zA-Z_$][a-zA-Z_$0-9]*$/g
   return regex.test(name)
 }
-console.log('Task 2: isValidVariable - should be true : ', isValidVariable('first_name')) // true
-console.log('Task 2: isValidVariable - should be false : ', isValidVariable('first-name')) // false
-console.log('Task 2: isValidVariable - should be false : ', isValidVariable('1first_name')) // false
-console.log('Task 2: isValidVariable - should be true : ', isValidVariable('firstname')) //
+console.log('Task 2: isValidVariable - should be true : ', isValidVariable('first_name'))
+console.log('Task 2: isValidVariable - should be false : ', isValidVariable('first-name'))
+console.log('Task 2: isValidVariable - should be false : ', isValidVariable('1first_name'))
+console.log('Task 2: isValidVariable - should be true : ', isValidVariable('firstname'))
 
 // 3. Write a function called tenMostFrequentWords which get the ten most frequent word from a string:
 const paragraph = `I love teaching. If you do not love teaching what else can you love. I love Python if you do not love something which can give you all the capabilities to develop an application what else can you love.`
