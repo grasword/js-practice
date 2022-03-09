@@ -25,8 +25,9 @@ const mostFrequentWords = (text, num) => {
   const regexp = /\w+/g
   const words = text.match(regexp)
 
-  const frequency = words.reduce((map, n) => {
-    return map.set(n, (map.get(n) || 0) + 1)
+  const frequency = words.reduce((map, w) => {
+    w = w.toLowerCase()
+    return map.set(w, (map.get(w) || 0) + 1)
   }, new Map())
 
   const arrayOfWords = Array.from(frequency, ([word, count]) => ({ word, count }))
