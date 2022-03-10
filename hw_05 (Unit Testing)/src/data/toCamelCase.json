@@ -1,0 +1,22 @@
+[
+  {
+    "argument": [12],
+    "result": ""
+  },
+  {
+    "argument": ["Hello World"],
+    "result": "helloWorld"
+  },
+  {
+    "argument": [" Hello    World  "],
+    "result": "helloWorld"
+  },
+  {
+    "argument": ["Hello World!\nWhat\tIs up?"],
+    "result": "helloWorldwhatisUp"
+  },
+  {
+    "argument": ["Hello World ! 123 What is up?"],
+    "result": "helloWorld123WhatIsUp"
+  }
+]
