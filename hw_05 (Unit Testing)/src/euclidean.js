@@ -16,7 +16,22 @@ function euclidean(a, b) {
    * Also take into consideration the documentation of the function!
    */
   // PLACE YOUR CODE BETWEEN THIS...
+  if (a < 0 || b < 0) {
+    gcd = 0;
+  } else {
+    const minValue = Math.min(a, b);
+    const maxValue = Math.max(a, b);
 
+    const calculateGcd = (min, dif) => {
+      const difference = dif % min;
+      if (difference === 0) {
+        gcd = min;
+      } else {
+        calculateGcd(difference, min % difference);
+      }
+    };
+    calculateGcd(minValue, maxValue);
+  }
   // ...AND THIS COMMENT LINE!
   return gcd;
 }
