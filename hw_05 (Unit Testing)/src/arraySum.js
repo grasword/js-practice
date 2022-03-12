@@ -7,7 +7,7 @@
  */
 function arraySum(elements) {
   // PLACE YOUR CODE BETWEEN THIS...
-  if (typeof elements !== 'object') {
+  if (!Array.isArray(elements)) {
     return 0;
   }
   const toNumber = (num) => {
