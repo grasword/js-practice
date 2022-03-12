@@ -7,13 +7,13 @@
  */
 function arraySum(elements) {
   // PLACE YOUR CODE BETWEEN THIS...
+  if (typeof elements !== 'object') {
+    return 0;
+  }
   const toNumber = (num) => {
     return typeof num === 'number' ? num : 0;
   };
   const flatten = elements.flat(Infinity);
-  if (flatten.length <= 1) {
-    return 0;
-  }
   return flatten.reduce((sum, num) => {
     return sum + toNumber(num);
   }, 0);
