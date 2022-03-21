@@ -1,8 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable space-before-function-paren */
-/* eslint-disable indent */
-/* eslint-disable semi */
-
+/* eslint-disable */
 import WeatherModel from '../model/WeatherModel'
 import XmlBodyParser from '../lib/XmlBodyParser'
 
@@ -10,10 +6,10 @@ describe('As a Weather API user', () => {
   describe('I have to get HTTP response body', () => {
     test('with [Title] node', async () => {
       const { data } = await WeatherModel.getWeatherData()
-      const title = XmlBodyParser.getTitle(data)
+      const title = await XmlBodyParser.getTitle(data)
 
       //  TODO: insert verifications to verify Title node value
-      // ...
+      expect(title).toBe('New York, NY - AccuWeather.com Forecast')
     })
 
     test('with [Channel] items', async () => {

@@ -1,4 +1,4 @@
-import AppConfig from '../configs/AppConfig';
+import AppConfig from '../configs/AppConfig.cjs';
 
 import axios from 'axios';
 
