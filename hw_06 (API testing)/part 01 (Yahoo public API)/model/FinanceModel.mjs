@@ -22,15 +22,4 @@ class FinanceModel {
   }
 }
 
-test('200 for a valid range', async () => {
-  //TODO: replace this method with FinanceModel.getFinanceData(...) method
-  // to be able to define different test conditions:
-  // - company
-  // - region
-  // - interval
-  // - range
-  const { status } = await FinanceModel.getFinanceData({ company: 'EPAM', region: 'UK', interval: '1mo', range: '1d' })
-  expect(status).toBe(200)
-})
-
 export default FinanceModel
