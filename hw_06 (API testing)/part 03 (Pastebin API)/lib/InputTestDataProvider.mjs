@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as fs from 'fs'
 import * as path from 'path'
 
@@ -8,7 +9,8 @@ class InputTestDataProvider {
     let data
     const filePath = path.join(DATA_DIR, fileName)
     try {
-      data = fs.readFileSync(filePath, 'utf8')
+      const dataString = fs.readFileSync(filePath, 'utf8')
+      data = JSON.parse(dataString)
     } catch (e) {
       console.log(e.stack)
     }
