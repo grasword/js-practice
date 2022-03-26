@@ -1,6 +1,7 @@
 {
-  "api_paste_name": "name",
+  "api_paste_name": "General Kenobi!",
+  "api_user_key": "3bb22f4cdca087303f583c62b7f899a1",
   "api_paste_code": "<p>test</p>",
-  "api_option": "pase",
+  "api_option": "paste",
   "api_paste_expire_date": "10M"
 }
