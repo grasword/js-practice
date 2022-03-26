@@ -1,3 +1,4 @@
+/* eslint-disable */
 import AppConfig from '../configs/AppConfig'
 import TokenProvider from '../lib/TokenProvider'
 
@@ -17,10 +18,14 @@ class PasteModel {
     //TODO: develop the method to be able to get data in object format
     // and define HTTP POST options
     const token = TokenProvider.getToken(tokenName)
-    const apiOption = data.api_option
-    console.log(apiOption) // undefined
+    const postData = new URLSearchParams(`api_dev_key=${token}`)
+
+    for (const [key, value] of Object.entries(data)) {
+      postData.append(key, value.toString())
+    }
+
     try {
-      return await axios.post(AppConfig.baseUrl, `api_dev_key=${token}` + '&api_paste_code=test' + '&api_option=paste')
+      return await axios.post(AppConfig.baseUrl, postData.toString())
     } catch (e) {
       return e.response
     }
