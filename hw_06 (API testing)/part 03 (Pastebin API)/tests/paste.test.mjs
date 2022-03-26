@@ -25,8 +25,8 @@ describe('As a Paste API user', () => {
       const listData = InputTestDataProvider.getTestData('case2.json')
       const { data } = await PasteModel.postPaste(listData, 'pastbin_token_1')
 
-      const expirationDate = await getPropValue(data, key, 'paste_expire_date')
-      const creationDate = await getPropValue(data, key, 'paste_date')
+      const expirationDate = getPropValue(data, key, 'paste_expire_date')
+      const creationDate = getPropValue(data, key, 'paste_date')
 
       const expirationTime = parseInt(expirationDate) - parseInt(creationDate)
       const TEN_MINUTES = 600
