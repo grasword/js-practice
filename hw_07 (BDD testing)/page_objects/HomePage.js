@@ -19,6 +19,7 @@ class HomePage extends AbstractPage {
 
   async getMenuNavItemsText() {
     // TODO: Implement a method that returns all text labels from the navigation menu
+    return await this.getTextFromElements(this.menuNavItems);
   }
 
   async clickOnMenuItem(menuItemName) {
