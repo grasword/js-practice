@@ -19,6 +19,7 @@ class ScreenerPage extends AbstractPage {
 
   async isCreateNewScreenButtonClickable() {
     // TODO: Implement a method that verifies that the Create New Screen button is interactive.
+    return await this.isClickable(this.createNewScreenButton);
   }
 
   async clickOnCreateNewScreenButton() {
