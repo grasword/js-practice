@@ -37,6 +37,12 @@ class ScreenerPage extends AbstractPage {
     await browser.pause(2000);
     await this.waitForPageLoading();
   }
+
+  async isCreateNewScreenMenuDisplayed() {
+    const createNewScreenMenu = await this.createNewScreenMenu;
+    await this.waitForDisplayed(createNewScreenMenu);
+    return await this.isDisplayed(createNewScreenMenu);
+  }
 }
 
 module.exports = ScreenerPage;
