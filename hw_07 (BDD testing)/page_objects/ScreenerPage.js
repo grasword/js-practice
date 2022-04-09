@@ -5,8 +5,8 @@ class ScreenerPage extends AbstractPage {
     super('Screener');
   }
 
-  get createNewScreenButton() {
-    return $('div#signed-out-msg + a[href="/screener/new"]');
+  get createNewScreenMenu() {
+    return $(`.//div/h3/span[contains(text(),'Create a New Screener')]`);
   }
 
   async open() {
