@@ -19,17 +19,21 @@ class ScreenerPage extends AbstractPage {
     await super.open('/screener');
   }
 
-  async isCreateNewScreenButtonDisplayed() {
-    return await this.isDisplayed(this.createNewScreenButton);
+  async isButtonDisplayed(buttonName) {
+    const button = await this.getButton(buttonName);
+    await this.waitForDisplayed(button);
+    return await this.isDisplayed(button);
   }
 
-  async isCreateNewScreenButtonClickable() {
-    // TODO: Implement a method that verifies that the Create New Screen button is interactive.
-    return await this.isClickable(this.createNewScreenButton);
+  async isButtonClickable(buttonName) {
+    const button = await this.getButton(buttonName);
+    await this.waitForClickable(button);
+    return await this.isClickable(button);
   }
 
-  async clickOnCreateNewScreenButton() {
-    await this.click(this.createNewScreenButton);
+  async clickOnButton(buttonName) {
+    const button = await this.getButton(buttonName);
+    await this.click(button);
     await browser.pause(2000);
     await this.waitForPageLoading();
   }
