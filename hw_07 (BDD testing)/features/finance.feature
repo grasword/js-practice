@@ -10,9 +10,14 @@ Feature: The Yahoo Finance Website
     Then the "Create New Screener" button is displayed
     And the "Create New Screener" button is clickable
     When the user clicks on the "Create New Screener" button
-    Then the browser URL contains "/screener/new" on the Screener page
+    # Implemented new steps due to site redesign
+    Then the "Create a New Screener" menu is displayed
+    And the "Index Screener" button is displayed
+    And the "Index Screener" button is clickable
+    When the user clicks on the "Index Screener" button
+    Then the browser URL contains "/screener/index/new" on the Screener page
     # Implement the following step in common.steps.js file
-    And the page title is "Free Stock Screener - Yahoo Finance" on the Screener page
+    And the page title is "Free Stock Index Screener - Yahoo Finance" on the Screener page
 
   Scenario: The user sees navigation menu items
     Given the user is on the Home page
