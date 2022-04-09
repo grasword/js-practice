@@ -9,6 +9,12 @@ class ScreenerPage extends AbstractPage {
     return $(`.//div/h3/span[contains(text(),'Create a New Screener')]`);
   }
 
+  async getButton(buttonName) {
+    return await buttonName === 'Create New Screener'
+      ? $('//*[@id="signed-out-msg"]/following-sibling::button')
+      : $(`.//a/h4[contains(text(), '${buttonName}')]`);
+  }
+
   async open() {
     await super.open('/screener');
   }
