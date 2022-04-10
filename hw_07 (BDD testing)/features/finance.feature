@@ -26,13 +26,13 @@ Feature: The Yahoo Finance Website
       | Nav Menu Items    |
       | Watchlists        |
       | My Portfolio      |
+      | Cryptocurrencies  |
       | Screeners         |
       | Markets           |
       | News              |
       | Personal Finance  |
-      | Cryptocurrencies  |
       | Videos            |
-      | Industries        |
+      | Yahoo U           |
 
   Scenario Outline: The user navigates through the navigation menu items
     Given the user is on the <page> page
@@ -45,4 +45,4 @@ Feature: The Yahoo Finance Website
         | Watchlists        | Curated Stock Watch Lists & Categories - Yahoo Finance              |
         | Portfolios        | Stock Portfolio & Tracker - Yahoo Finance                           |
         | Screener          | Stock Screeners - Yahoo Finance                                     |
-        | Cryptocurrencies  | All Cryptocurrencies Screener - Yahoo Finance                       |
+        | Cryptocurrencies  | Cryptocurrency List & Prices, Top Cryptocurrencies - Yahoo Finance  |
