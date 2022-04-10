@@ -16,3 +16,10 @@ Then(/^the browser URL contains "([^"]*)" on the (\w+) page$/, async (path, page
   const actualUrl = await page.getUrl();
   expect(expectedUrl).to.eql(actualUrl);
 });
+
+Then(/^the page title is "([^"]*)" on the (\w+) page$/, async (title, pageName) => {
+  const page = await PageFactory.getPage(pageName);
+  const expectedTitle = title;
+  const actualTitle = await page.getTitle();
+  expect(actualTitle).to.eql(expectedTitle);
+});
