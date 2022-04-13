@@ -15,7 +15,7 @@ module.exports = class AbstractPage {
         return state === 'complete';
       },
       {
-        timeout: 10000,
+        timeout: 20000,
         interval: 1000,
       },);
     } catch (error) {
@@ -29,7 +29,7 @@ module.exports = class AbstractPage {
 
   async waitForDisplayed(element) {
     try {
-      await element.waitForDisplayed({ timeout: 10000 });
+      await element.waitForDisplayed({ timeout: 20000 });
     } catch (error) {
       if (error.name === 'TimeoutError') {
         throw new Error('Time for waiting element is out, element still not displayed');
@@ -41,7 +41,7 @@ module.exports = class AbstractPage {
 
   async waitForClickable(element) {
     try {
-      await element.waitForClickable({ timeout: 10000 });
+      await element.waitForClickable({ timeout: 20000 });
     } catch (error) {
       if (error.name === 'TimeoutError') {
         throw new Error(`Time for waiting element is out, element still not clickable`);
