@@ -22,4 +22,5 @@ Then(/^the page title is "([^"]*)" on the (\w+) page$/, async (title, pageName) 
   const expectedTitle = title;
   const actualTitle = await page.getTitle();
   expect(actualTitle).to.eql(expectedTitle);
+  // The test for the "Screener" page is always skipped for some reason
 });
