@@ -10,7 +10,7 @@ class ScreenerPage extends AbstractPage {
   }
 
   async getButton(buttonName) {
-    return await buttonName === 'Create New Screener'
+    return buttonName === 'Create New Screener'
       ? $('//*[@id="signed-out-msg"]/following-sibling::button')
       : $(`.//a/h4[contains(text(), '${buttonName}')]`);
   }
@@ -22,13 +22,13 @@ class ScreenerPage extends AbstractPage {
   async isButtonDisplayed(buttonName) {
     const button = await this.getButton(buttonName);
     await this.waitForDisplayed(button);
-    return await this.isDisplayed(button);
+    return this.isDisplayed(button);
   }
 
   async isButtonClickable(buttonName) {
     const button = await this.getButton(buttonName);
     await this.waitForClickable(button);
-    return await this.isClickable(button);
+    return this.isClickable(button);
   }
 
   async clickOnButton(buttonName) {
@@ -41,7 +41,7 @@ class ScreenerPage extends AbstractPage {
   async isCreateNewScreenMenuDisplayed() {
     const createNewScreenMenu = await this.createNewScreenMenu;
     await this.waitForDisplayed(createNewScreenMenu);
-    return await this.isDisplayed(createNewScreenMenu);
+    return this.isDisplayed(createNewScreenMenu);
   }
 }
 
