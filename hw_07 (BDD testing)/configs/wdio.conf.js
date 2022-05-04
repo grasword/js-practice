@@ -57,7 +57,14 @@ exports.config = {
       maxInstances: 5,
       browserName: 'chrome',
       'goog:chromeOptions': {
-        args: ['--disable-web-security', '--no-sandbox', '--disable-infobars'],
+        args: [
+          '--disable-web-security',
+          '--no-sandbox',
+          '--disable-infobars',
+          '--ignore-certificate-errors',
+          '--ignore-ssl-errors',
+          '--ignore-certificate-errors-spki-list',
+        ],
         prefs: {
           'profile.managed_default_content_settings.popups': 1,
           'profile.managed_default_content_settings.notifications': 1,
@@ -99,7 +106,7 @@ exports.config = {
   baseUrl: AppConfig.baseUrl,
   //
   // Default timeout for all waitFor* commands.
-  waitforTimeout: 10000,
+  waitforTimeout: 60000,
   //
   // Default timeout in milliseconds for request
   // if browser driver or grid doesn't send response
@@ -134,7 +141,15 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ['spec'],
+  reporters: [
+    'dot',
+    [
+      'junit',
+      {
+        outputDir: './',
+      },
+    ],
+  ],
 
   //
   // If you are using Cucumber you need to specify the location of your step definitions.
